@@ -26,4 +26,13 @@ house-price-prediction-ml/
 └── .gitignore
 ```
 
+## Dataset
+
+This project uses the **California Housing Dataset**, containing housing-related features such as location, median income, population, and house value.
+
+Target Variable:
+
+- `median_house_value`
+
+
 > Project is currently under development.
