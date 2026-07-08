@@ -1,6 +1,8 @@
 import numpy as np
 import pandas as pd
 from sklearn.model_selection import StratifiedShuffleSplit
+from preprocessing import build_preprocessing_pipeline
+
 
 housing = pd.read_csv("../data/housing.csv")
 
@@ -36,3 +38,17 @@ test_set.to_csv("../data/test.csv", index=False)
 
 print(f"Training samples : {len(train_set)}")
 print(f"Testing samples : {len(test_set)}")
+
+train_labels = train_set["median_house_value"].copy()
+train_features = train_set.drop("median_house_value" , axis =1)
+
+
+numerical_columns = train_features.drop("ocean_proximity" , axis =1).columns.tolist()
+categorical_columns = ["ocean_proximity"]
+
+
+pipeline = build_preprocessing_pipeline(numerical_columns , categorical_columns)
+
+train_prepared = pipeline.fit_transform(train_features)
+
+print(train_prepared.shape)
