@@ -1,5 +1,8 @@
 import numpy as np
 import pandas as pd
+from sklearn.linear_model import LinearRegression
+from sklearn.tree import DecisionTreeRegressor
+from sklearn.metrics import root_mean_squared_error
 from sklearn.model_selection import StratifiedShuffleSplit
 from preprocessing import build_preprocessing_pipeline
 
@@ -52,3 +55,43 @@ pipeline = build_preprocessing_pipeline(numerical_columns , categorical_columns)
 train_prepared = pipeline.fit_transform(train_features)
 
 print(train_prepared.shape)
+
+
+
+# Linear Regression
+
+linear_model = LinearRegression()
+
+linear_model.fit(train_prepared, train_labels)
+
+linear_predictions = linear_model.predict(train_prepared)
+
+linear_rmse = root_mean_squared_error(
+    train_labels,
+    linear_predictions
+)
+
+print(f"Linear Regression RMSE : {linear_rmse:.2f}")
+
+
+# Decision Tree
+
+tree_model = DecisionTreeRegressor(
+    random_state=42
+)
+
+tree_model.fit(
+    train_prepared,
+    train_labels
+)
+
+tree_predictions = tree_model.predict(
+    train_prepared
+)
+
+tree_rmse = root_mean_squared_error(
+    train_labels,
+    tree_predictions
+)
+
+print(f"Decision Tree RMSE : {tree_rmse:.2f}")
