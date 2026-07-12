@@ -5,6 +5,7 @@ from sklearn.tree import DecisionTreeRegressor
 from sklearn.metrics import root_mean_squared_error
 from sklearn.model_selection import StratifiedShuffleSplit
 from preprocessing import build_preprocessing_pipeline
+from sklearn.model_selection import cross_val_score
 
 
 housing = pd.read_csv("../data/housing.csv")
@@ -73,6 +74,19 @@ linear_rmse = root_mean_squared_error(
 
 print(f"Linear Regression RMSE : {linear_rmse:.2f}")
 
+linear_scores = cross_val_score(
+    linear_model,
+    train_prepared,
+    train_labels,
+    scoring="neg_root_mean_squared_error",
+    cv=5
+)
+linear_rmse_scores = -linear_scores
+print("Linear Regression CV RMSE:", linear_rmse_scores.mean())
+print("Standard Deviation:", linear_rmse_scores.std())
+
+
+
 
 # Decision Tree
 
@@ -95,3 +109,17 @@ tree_rmse = root_mean_squared_error(
 )
 
 print(f"Decision Tree RMSE : {tree_rmse:.2f}")
+
+tree_scores = cross_val_score(
+    tree_model,
+    train_prepared,
+    train_labels,
+    scoring="neg_root_mean_squared_error",
+    cv=5
+)
+
+tree_rmse_scores = -tree_scores
+
+print("Decision Tree CV RMSE:", tree_rmse_scores.mean())
+
+print("Standard Deviation:", tree_rmse_scores.std())
