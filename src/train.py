@@ -1,3 +1,5 @@
+import os
+import joblib
 import numpy as np
 import pandas as pd
 from sklearn.linear_model import LinearRegression
@@ -151,3 +153,14 @@ forest_rmse_scores = -forest_scores
 print("Random Forest CV RMSE :", forest_rmse_scores.mean())
 
 print("Standard Deviation :", forest_rmse_scores.std())
+
+#saving models and pipeline for future new datasets
+
+os.makedirs("../models ",exist_ok=True)
+
+joblib.dump(forest_model,"../models/models.pkl")
+
+joblib.dump(pipeline,"../models/pipeline.pkl")
+
+print("Model saved successfully.")
+print("Pipeline saved successfully.")
