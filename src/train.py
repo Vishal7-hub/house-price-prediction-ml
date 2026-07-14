@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 from sklearn.linear_model import LinearRegression
 from sklearn.tree import DecisionTreeRegressor
+from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import root_mean_squared_error
 from sklearn.model_selection import StratifiedShuffleSplit
 from preprocessing import build_preprocessing_pipeline
@@ -123,3 +124,30 @@ tree_rmse_scores = -tree_scores
 print("Decision Tree CV RMSE:", tree_rmse_scores.mean())
 
 print("Standard Deviation:", tree_rmse_scores.std())
+
+#random forest
+
+forest_model = RandomForestRegressor(random_state=42)
+
+forest_model.fit(train_prepared, train_labels)
+
+forest_predictions = forest_model.predict(train_prepared)
+
+forest_rmse = root_mean_squared_error(train_labels , forest_predictions)
+
+print(f"Random forest RMSE: {forest_rmse:2f}")
+
+forest_scores = cross_val_score(
+    forest_model,
+    train_prepared,
+    train_labels,
+    scoring="neg_root_mean_squared_error",
+    cv=5
+
+)
+
+forest_rmse_scores = -forest_scores
+
+print("Random Forest CV RMSE :", forest_rmse_scores.mean())
+
+print("Standard Deviation :", forest_rmse_scores.std())
