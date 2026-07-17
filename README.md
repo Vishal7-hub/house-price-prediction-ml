@@ -1,106 +1,301 @@
-#  House Price Prediction using Machine Learning
+#  California House Price Prediction using Machine Learning
 
-An end-to-end Machine Learning project for predicting California housing prices using Scikit-Learn.
+Predict California house prices using Machine Learning by building an end-to-end regression pipeline with data preprocessing, feature engineering, model evaluation, and prediction.
 
-#  California House Price Prediction
+---
 
-![Python](https://img.shields.io/badge/Python-3.10-blue)
+##  Project Overview
 
-![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-ML-orange)
+This project demonstrates a complete Machine Learning workflow for predicting California housing prices using the California Housing Dataset.
 
-![License](https://img.shields.io/badge/License-MIT-green)
+The project includes:
 
-## Tech Stack
+- Data preprocessing using Scikit-Learn Pipelines
+- Stratified Train-Test Split
+- Feature Scaling and One-Hot Encoding
+- Model Training
+- Cross Validation
+- Model Comparison
+- Model Persistence using Joblib
+- Prediction on unseen data
+
+The primary objective is to compare multiple regression algorithms and identify the best-performing model based on Cross Validation RMSE.
+
+---
+
+##  Dataset
+
+Dataset: California Housing Dataset
+
+The dataset contains housing information such as:
+
+- Longitude
+- Latitude
+- Housing Median Age
+- Total Rooms
+- Total Bedrooms
+- Population
+- Households
+- Median Income
+- Ocean Proximity
+
+Target Variable:
+
+```
+median_house_value
+```
+
+---
+
+#  Project Structure
+
+```
+house-price-prediction-ml/
+
+│
+
+├── data/
+│   ├── housing.csv
+│   └── test.csv
+│
+├── models/
+│   ├── model.pkl
+│   └── pipeline.pkl
+│
+├── src/
+│   ├── preprocessing.py
+│   ├── train.py
+│   └── predict.py
+│
+├── screenshots/
+│
+├── requirements.txt
+│
+├── README.md
+│
+└── .gitignore
+```
+
+---
+
+#  Technologies Used
 
 - Python
 - NumPy
 - Pandas
 - Scikit-Learn
 - Joblib
-- Matplotlib
 
-## Project Structure
+---
 
-```text
-house-price-prediction-ml/
-│
-├── data/
-├── models/
-├── notebooks/
-├── screenshots/
-├── src/
-├── README.md
-├── requirements.txt
-└── .gitignore
+#  Machine Learning Workflow
+
+```
+Dataset
+
+↓
+
+Data Cleaning
+
+↓
+
+Feature Engineering
+
+↓
+
+Stratified Train-Test Split
+
+↓
+
+Preprocessing Pipeline
+
+↓
+
+Model Training
+
+↓
+
+Cross Validation
+
+↓
+
+Model Comparison
+
+↓
+
+Random Forest Selection
+
+↓
+
+Model Saving
+
+↓
+
+Prediction
 ```
 
-## Dataset
+---
 
-This project uses the **California Housing Dataset**, containing housing-related features such as location, median income, population, and house value.
-
-Target Variable:
-
-- `median_house_value`
-
-
-
-
-##  Model Training and Evaluation
-
-Three machine learning regression models were trained and evaluated to predict California housing prices.
-
-### Models Implemented
+#  Models Implemented
 
 - Linear Regression
 - Decision Tree Regressor
 - Random Forest Regressor
 
-### Evaluation Strategy
+---
 
-To obtain a reliable estimate of model performance, 5-Fold Cross Validation was used instead of relying only on training performance.
+#  Model Performance
 
-**Evaluation Metric**
+| Model | Training RMSE | Cross Validation RMSE |
+|--------|--------------:|----------------------:|
+| Linear Regression | 69050.56 | 69218.45 |
+| Decision Tree | 0.00 | 70629.24 |
+| Random Forest | **18342.37** | **49941.73** |
 
-- Root Mean Squared Error (RMSE)
+### Final Model
 
-### Model Performance
+ Random Forest Regressor
 
-| Model | Training RMSE | Cross Validation RMSE | Standard Deviation |
-|--------|--------------:|----------------------:|-------------------:|
-| Linear Regression | 69050.56 | 69218.45 | 689.50 |
-| Decision Tree | 0.00 | 70629.24 | 1447.66 |
-| Random Forest | **18342.37** | **49941.73** | **760.90** |
+Reason:
 
-### Key Findings
+- Lowest Cross Validation RMSE
+- Better Generalization
+- Reduced Overfitting
+- Best Overall Performance
 
-- Linear Regression provided a stable baseline but underfit the dataset.
-- Decision Tree achieved perfect training performance but suffered from severe overfitting.
-- Random Forest delivered the lowest cross-validation RMSE, making it the best-performing model.
-- Cross-validation confirmed that Random Forest generalized significantly better than the other models.
+---
 
-### Selected Model
+#  Features
 
- Random Forest Regressor was selected as the final model due to its superior predictive performance and better generalization on unseen data.
+- End-to-End Machine Learning Pipeline
+- Stratified Data Splitting
+- Automated Data Preprocessing
+- Feature Scaling
+- One-Hot Encoding
+- Cross Validation
+- Multiple Model Comparison
+- Model Persistence using Joblib
+- Prediction Pipeline
+
+---
+
+#  Installation
+
+##  Clone Repository
+
+```bash
+git clone https://github.com/Vishal7-hub/house-price-prediction-ml.git
+```
+
+---
+
+##  Move into Project Directory
+
+```bash
+cd house-price-prediction-ml
+```
+
+---
+
+##  Create Virtual Environment (Recommended)
+
+### Windows
+
+```bash
+python -m venv venv
+```
+
+Activate Virtual Environment
+
+```bash
+venv\Scripts\activate
+```
+
+### Linux / macOS
+
+```bash
+python3 -m venv venv
+
+source venv/bin/activate
+```
+
+---
+
+##  Install Required Packages
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+##  Train the Model
+
+```bash
+cd src
+
+python train.py
+```
+
+This will:
+
+- Load dataset
+- Split train and test data
+- Build preprocessing pipeline
+- Train Random Forest model
+- Evaluate model
+- Save trained model and preprocessing pipeline
+
+---
+
+##  Predict House Prices
+
+```bash
+python predict.py
+```
+
+Prediction results will be generated for unseen data.
+
+---
+
+#  Future Improvements
+
+- Hyperparameter Tuning using GridSearchCV
+- Feature Selection
+- XGBoost
+- LightGBM
+- Model Deployment using FastAPI
+- Docker Containerization
+- CI/CD Pipeline
+
+---
+
+#  Key Learnings
+
+During this project I learned:
+
+- Building reusable preprocessing pipelines
+- Handling numerical and categorical features
+- Stratified Train-Test Splitting
+- Cross Validation
+- Model Evaluation using RMSE
+- Model Comparison
+- Random Forest Regression
+- Model Serialization using Joblib
+
+---
+
+#  Author
+
+**Vishal Kumar Roy**
+
+Aspiring Machine Learning Engineer | Data Science Enthusiast
+
+GitHub:
+https://github.com/Vishal7-hub
 
 
- ##  Model Persistence
 
-The final Random Forest model and preprocessing pipeline are serialized using Joblib for future inference.
+---
 
-### Saved Artifacts
-
-- `models/model.pkl` – Trained Random Forest model
-- `models/pipeline.pkl` – Preprocessing pipeline
-
-### Prediction Workflow
-
-1. Load trained model
-2. Load preprocessing pipeline
-3. Read unseen input data
-4. Apply preprocessing
-5. Generate predictions
-6. Save results to `predictions.csv`
-
-This approach eliminates the need to retrain the model for every prediction and follows standard machine learning deployment practices.
-
-> Project is currently under development.
+##  If you found this project useful, consider giving it a Star.
